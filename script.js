@@ -147,26 +147,44 @@
     setInterval(blink, 3500);
   };
 
-  /* ── Video autoplay ────────────────────────────── */
+  /* ── Ping-pong video ──────────────────────────── */
 
   var initVideo = function () {
     var video = document.getElementById("bg-video");
     var fallback = document.getElementById("bg-fallback");
     if (!video) return;
 
-    var play = function () {
-      var p = video.play();
-      if (p !== undefined) {
-        p.catch(function () {
-          if (fallback) fallback.classList.add("show");
-        });
-      }
+    var ready = false;
+    var dir = 1;
+    var speed = 0.008; // seconds per frame — smooth bidirectional
+    var VP = 0; // virtual progress 0..1
+
+    var start = function () {
+      video.play().catch(function () {
+        if (fallback) fallback.classList.add("show");
+      });
     };
 
-    // Some browsers need user gesture. Try immediate, then on first interaction.
-    play();
-    document.addEventListener("click", play, { once: true });
-    document.addEventListener("touchstart", play, { once: true });
+    // Wait for metadata, then start ping-pong
+    var onReady = function () {
+      ready = true;
+      var tick = function () {
+        if (!ready) { requestAnimationFrame(tick); return; }
+        VP += dir * speed;
+        if (VP >= 1) { VP = 1; dir = -1; }
+        if (VP <= 0) { VP = 0; dir = 1; }
+        video.currentTime = VP * video.duration;
+        requestAnimationFrame(tick);
+      };
+      tick();
+    };
+
+    if (video.readyState >= 1) { onReady(); }
+    else { video.addEventListener("loadedmetadata", onReady, { once: true }); }
+
+    start();
+    document.addEventListener("click", start, { once: true });
+    document.addEventListener("touchstart", start, { once: true });
   };
 
   observeAnimations();
