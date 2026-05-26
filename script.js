@@ -83,18 +83,16 @@
 
   var video = document.getElementById("bg-video");
   if (video) {
-    var ready = false;
-    var VP = 0; dir = 1;
-    var SPEED = 0.003; // seconds per frame — slower = smoother
-    var THROTTLE = 60; // ms between seeks (~16fps)
+    var started = false;
+    var VP = 0, dir = 1;
+    var SPEED = 0.006;
+    var THROTTLE = 60;
     var last = 0;
-    var dur = 1;
+    var dur = video.duration || 1;
 
     var tick = function (now) {
-      if (!ready) { requestAnimationFrame(tick); return; }
       if (now - last < THROTTLE) { requestAnimationFrame(tick); return; }
       last = now;
-
       VP += dir * SPEED;
       if (VP >= 1) { VP = 1; dir = -1; }
       if (VP <= 0) { VP = 0; dir = 1; }
@@ -103,16 +101,17 @@
     };
 
     var start = function () {
+      if (started) return;
+      started = true;
       video.play().then(function () {
         dur = video.duration;
-        ready = true;
         requestAnimationFrame(tick);
       }).catch(function () {});
     };
 
-    if (video.readyState >= 2) { ready = true; dur = video.duration; requestAnimationFrame(tick); }
+    if (video.readyState >= 2) { start(); }
     else { video.addEventListener("canplay", start, { once: true }); }
-    start();
     document.addEventListener("click", start, { once: true });
+    document.addEventListener("touchstart", start, { once: true });
   }
 })();

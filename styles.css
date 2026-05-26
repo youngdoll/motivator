@@ -328,10 +328,6 @@ h1 {
   justify-content: flex-end;
 }
 
-.hero-actions .button:first-child {
-  margin-right: auto;
-}
-
 /* ── Buttons ─────────────────────────────────────── */
 
 .button {
@@ -651,8 +647,7 @@ h1 {
   .top-nav { display: none; }
   .section-grid, .proof-columns { grid-template-columns: 1fr; }
   .question-grid { grid-template-columns: repeat(2, 1fr); }
-  .hero-actions { justify-content: flex-start; }
-  .hero-actions .button:first-child { margin-right: 0; }
+  .hero-actions { justify-content: flex-end; }
 }
 
 @media (max-width: 640px) {
