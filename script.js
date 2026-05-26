@@ -2,7 +2,7 @@
   var CONFIG = window.MOTIVATOR_CONFIG || {};
   var DEFAULT_BOT_URL = "https://t.me/YOUR_BOT_USERNAME";
 
-  /* ── Bot links ─────────────────────────────────── */
+  /* ── Config ─────────────────────────────────────── */
 
   var ATTRS = {
     BOT_LINK: "data-bot-link",
@@ -37,24 +37,22 @@
 
     var observer = new IntersectionObserver(
       function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("in-view");
-            observer.unobserve(entry.target);
+        for (var i = 0; i < entries.length; i++) {
+          if (entries[i].isIntersecting) {
+            entries[i].target.classList.add("in-view");
+            observer.unobserve(entries[i].target);
           }
-        });
+        }
       },
       { threshold: 0.15 }
     );
 
-    targets.forEach(function (el) {
-      observer.observe(el);
-    });
+    for (var i = 0; i < targets.length; i++) {
+      observer.observe(targets[i]);
+    }
   };
 
-  observeAnimations();
-
-  /* ── Floating dust particles ───────────────────── */
+  /* ── Floating dust (lightweight) ───────────────── */
 
   var initDust = function () {
     var canvas = document.getElementById("dust-canvas");
@@ -63,26 +61,26 @@
     var ctx = canvas.getContext("2d");
     var particles = [];
     var W, H;
+    var animId;
 
     var resize = function () {
       W = canvas.width = window.innerWidth;
       H = canvas.height = window.innerHeight;
     };
 
-    var createParticle = function () {
-      return {
+    resize();
+
+    var count = Math.min(30, Math.floor((W * H) / 25000));
+
+    for (var i = 0; i < count; i++) {
+      particles.push({
         x: Math.random() * W,
         y: Math.random() * H,
-        r: Math.random() * 1.8 + 0.4,
-        speed: Math.random() * 0.15 + 0.03,
-        drift: (Math.random() - 0.5) * 0.08,
-        opacity: Math.random() * 0.3 + 0.05,
-      };
-    };
-
-    var count = Math.min(80, Math.floor((W * H) / 12000));
-    for (var i = 0; i < count; i++) {
-      particles.push(createParticle());
+        r: Math.random() * 1.4 + 0.3,
+        speed: Math.random() * 0.12 + 0.02,
+        drift: (Math.random() - 0.5) * 0.06,
+        opacity: Math.random() * 0.2 + 0.03,
+      });
     }
 
     var animate = function () {
@@ -90,33 +88,25 @@
 
       for (var i = 0; i < particles.length; i++) {
         var p = particles[i];
+        p.y -= p.speed;
+        p.x += p.drift;
+
+        if (p.y < -10) { p.y = H + 10; p.x = Math.random() * W; }
+        if (p.x < -10) p.x = W + 10;
+        if (p.x > W + 10) p.x = -10;
+
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         ctx.fillStyle = "rgba(255, 215, 0, " + p.opacity + ")";
         ctx.fill();
-
-        p.y -= p.speed;
-        p.x += p.drift;
-
-        if (p.y < -10) {
-          p.y = H + 10;
-          p.x = Math.random() * W;
-        }
-        if (p.x < -10) p.x = W + 10;
-        if (p.x > W + 10) p.x = -10;
       }
 
-      requestAnimationFrame(animate);
+      animId = requestAnimationFrame(animate);
     };
 
     window.addEventListener("resize", resize);
-    resize();
-
-    // stagger start
-    setTimeout(animate, 600);
+    setTimeout(animate, 800);
   };
-
-  initDust();
 
   /* ── Coordinates ───────────────────────────────── */
 
@@ -125,48 +115,39 @@
     var line2 = document.getElementById("coord-line-2");
     if (!line1 || !line2) return;
 
-    var base = { lat: 55.7558, lng: 37.6173 };
+    var lat = 55.7558, lng = 37.6173;
     var step = 0.00008;
-    var dir = { lat: 1, lng: -1 };
+    var dirLat = 1, dirLng = -1;
 
-    var pad = function (n, len) {
-      var s = n.toFixed(4);
-      while (s.length < len) s = " " + s;
+    var pad = function (n) {
+      var s = Math.abs(n).toFixed(4);
+      while (s.length < 8) s = " " + s;
       return s;
     };
 
-    var formatLat = function (v) {
-      return (v >= 0 ? "N" : "S") + " " + pad(Math.abs(v), 8);
-    };
-
-    var formatLng = function (v) {
-      return (v >= 0 ? "E" : "W") + " " + pad(Math.abs(v), 8);
-    };
-
     var tick = function () {
-      base.lat += step * dir.lat;
-      base.lng += step * dir.lng;
-
-      if (base.lat > 55.757 || base.lat < 55.754) dir.lat *= -1;
-      if (base.lng > 37.619 || base.lng < 37.615) dir.lng *= -1;
-
-      line1.textContent = formatLat(base.lat);
-      line2.textContent = formatLng(base.lng);
+      lat += step * dirLat;
+      lng += step * dirLng;
+      if (lat > 55.757 || lat < 55.754) dirLat *= -1;
+      if (lng > 37.619 || lng < 37.615) dirLng *= -1;
+      line1.textContent = (lat >= 0 ? "N" : "S") + " " + pad(lat);
+      line2.textContent = (lng >= 0 ? "E" : "W") + " " + pad(lng);
     };
 
     tick();
-    setInterval(tick, 2000);
+    setInterval(tick, 2500);
 
-    // blink visibility
     var blink = function () {
-      var show = Math.random() > 0.12;
+      var show = Math.random() > 0.15;
       line1.classList.toggle("vis", show);
       line2.classList.toggle("vis", show);
     };
 
     blink();
-    setInterval(blink, 3000 + Math.random() * 2000);
+    setInterval(blink, 3500);
   };
 
+  observeAnimations();
+  initDust();
   initCoordinates();
 })();
