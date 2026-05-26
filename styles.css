@@ -265,17 +265,21 @@ body::before {
 .hero {
   position: relative;
   display: grid;
-  min-height: 96svh;
-  padding: 130px clamp(18px, 5vw, 72px) 36px;
+  min-height: 100svh;
+  padding: 110px clamp(18px, 5vw, 72px) 28px;
   overflow: hidden;
   border-bottom: 1px solid rgba(255, 215, 0, 0.04);
   background: transparent;
 }
 
-.hero-content { width: min(880px, 100%); align-self: center; }
+.hero-content {
+  width: min(860px, 100%);
+  align-self: start;
+  margin-top: auto;
+}
 
 .eyebrow {
-  margin: 0 0 16px;
+  margin: 0 0 12px;
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
@@ -285,7 +289,7 @@ body::before {
 
 h1, h2 {
   margin: 0;
-  line-height: 0.92;
+  line-height: 0.9;
   font-family: var(--font-display);
   text-transform: uppercase;
   font-weight: 800;
@@ -294,13 +298,13 @@ h1, h2 {
 
 h1 {
   max-width: 960px;
-  font-size: clamp(52px, 10vw, 148px);
+  font-size: clamp(42px, 8vw, 120px);
   color: var(--white);
 }
 
 .hero-question {
-  margin: 20px 0 0;
-  font-size: clamp(22px, 3.5vw, 44px);
+  margin: 14px 0 0;
+  font-size: clamp(18px, 3vw, 36px);
   font-weight: 700;
   text-transform: uppercase;
   color: var(--gold);
@@ -308,15 +312,25 @@ h1 {
 }
 
 .hero-copy {
-  max-width: 680px;
-  margin: 20px 0 0;
-  font-size: clamp(15px, 1.6vw, 19px);
-  line-height: 1.6;
+  max-width: 620px;
+  margin: 14px 0 0;
+  font-size: clamp(14px, 1.4vw, 17px);
+  line-height: 1.55;
   color: #ddd;
   text-shadow: var(--ts-strong);
 }
 
-.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+  justify-content: flex-end;
+}
+
+.hero-actions .button:first-child {
+  margin-right: auto;
+}
 
 /* ── Buttons ─────────────────────────────────────── */
 
@@ -358,16 +372,15 @@ h1 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1px;
-  width: min(760px, 100%);
+  width: min(600px, 100%);
   align-self: end;
-  margin-top: 46px;
+  margin-top: auto;
   border: 1px solid rgba(255, 215, 0, 0.06);
   background: rgba(255, 215, 0, 0.06);
 }
 
 .hero-metrics div {
-  min-height: 90px;
-  padding: 16px 18px;
+  padding: 14px 16px;
   background: rgba(5, 5, 5, 0.55);
   border-left: 1px solid transparent;
   transition: border-color 0.25s;
@@ -377,7 +390,7 @@ h1 {
 
 .hero-metrics span {
   display: block;
-  font-size: clamp(24px, 3.5vw, 40px);
+  font-size: clamp(20px, 3vw, 34px);
   font-weight: 800;
   line-height: 1;
   font-family: var(--font-display);
@@ -386,8 +399,8 @@ h1 {
 }
 
 .hero-metrics p {
-  margin: 8px 0 0;
-  font-size: 10px;
+  margin: 6px 0 0;
+  font-size: 9px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -627,22 +640,49 @@ h1 {
 
 /* ── Responsive ──────────────────────────────────── */
 
+@media (max-width: 1024px) {
+  h1 { font-size: clamp(36px, 7vw, 90px); }
+  .hero-copy { max-width: 500px; }
+  .hero-metrics { width: min(500px, 100%); }
+}
+
 @media (max-width: 920px) {
   .site-header { grid-template-columns: 1fr auto; }
   .top-nav { display: none; }
   .section-grid, .proof-columns { grid-template-columns: 1fr; }
   .question-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero-actions { justify-content: flex-start; }
+  .hero-actions .button:first-child { margin-right: 0; }
 }
 
 @media (max-width: 640px) {
-  .site-header { padding: 12px 14px; gap: 10px; }
-  .brand { font-size: 12px; }
-  .header-cta { min-width: 84px; padding: 9px 12px; font-size: 11px; }
-  .hero { min-height: 94svh; padding: 100px 16px 20px; }
-  h1 { font-size: clamp(40px, 14vw, 64px); }
-  .hero-actions, .button { width: 100%; }
+  .site-header { padding: 10px 14px; gap: 8px; }
+  .brand { font-size: 11px; }
+  .brand-mark { width: 8px; height: 8px; }
+  .header-cta { min-width: 74px; padding: 8px 10px; font-size: 10px; }
+  .hero { min-height: 100svh; padding: 88px 14px 16px; }
+  h1 { font-size: clamp(34px, 13vw, 52px); }
+  .hero-question { margin: 10px 0 0; font-size: clamp(17px, 4.5vw, 26px); }
+  .hero-copy { margin: 10px 0 0; font-size: clamp(13px, 3.5vw, 16px); }
+  .hero-actions { margin-top: 16px; flex-direction: column; }
+  .hero-actions .button:first-child { margin-right: 0; }
+  .button { width: 100%; min-height: 44px; padding: 12px 16px; font-size: 11px; }
+  .hero-metrics { width: 100%; }
   .hero-metrics, .question-grid { grid-template-columns: 1fr; }
-  .hero-metrics div, .question-grid article { min-height: auto; }
-  .section { padding-left: 16px; padding-right: 16px; }
-  .coordinates { bottom: 12px; right: 12px; font-size: 9px; }
+  .hero-metrics div { padding: 12px 14px; }
+  .hero-metrics span { font-size: clamp(18px, 6vw, 28px); }
+  .section { padding: 50px 14px 60px; }
+  .section-kicker { font-size: 9px; margin-bottom: 10px; }
+  .section-grid { gap: 20px; }
+  .copy-block p { font-size: clamp(14px, 3.5vw, 17px); }
+  .question-grid article { min-height: auto; padding: 16px; }
+  .question-grid p { font-size: clamp(14px, 3.5vw, 18px); }
+  .protocol-list div { padding: 16px 18px; }
+  .protocol-list strong { font-size: 14px; }
+  .proof-columns > div { padding: 24px 18px; }
+  .terminal-body { padding: 24px 18px; }
+  .terminal-body h2 { font-size: clamp(22px, 7vw, 36px); }
+  .final-inner h2 { font-size: clamp(32px, 10vw, 52px); }
+  .site-footer { padding: 20px 14px; font-size: 10px; flex-direction: column; gap: 6px; text-align: center; }
+  .coordinates { bottom: 10px; right: 10px; font-size: 8px; }
 }

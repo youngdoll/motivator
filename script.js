@@ -79,12 +79,40 @@
     }, 4000);
   }
 
-  /* ── Video play (native loop, HW accelerated) ──── */
+  /* ── Video ping-pong (0→1→0, throttled seeking) ── */
 
   var video = document.getElementById("bg-video");
   if (video) {
-    var play = function () { video.play(); };
-    play();
-    document.addEventListener("click", play, { once: true });
+    var ready = false;
+    var VP = 0; dir = 1;
+    var SPEED = 0.003; // seconds per frame — slower = smoother
+    var THROTTLE = 60; // ms between seeks (~16fps)
+    var last = 0;
+    var dur = 1;
+
+    var tick = function (now) {
+      if (!ready) { requestAnimationFrame(tick); return; }
+      if (now - last < THROTTLE) { requestAnimationFrame(tick); return; }
+      last = now;
+
+      VP += dir * SPEED;
+      if (VP >= 1) { VP = 1; dir = -1; }
+      if (VP <= 0) { VP = 0; dir = 1; }
+      video.currentTime = VP * dur;
+      requestAnimationFrame(tick);
+    };
+
+    var start = function () {
+      video.play().then(function () {
+        dur = video.duration;
+        ready = true;
+        requestAnimationFrame(tick);
+      }).catch(function () {});
+    };
+
+    if (video.readyState >= 2) { ready = true; dur = video.duration; requestAnimationFrame(tick); }
+    else { video.addEventListener("canplay", start, { once: true }); }
+    start();
+    document.addEventListener("click", start, { once: true });
   }
 })();
