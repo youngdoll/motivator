@@ -1,0 +1,6 @@
+node_modules/
+bot/data/
+bot/.env
+.DS_Store
+*.log
+_check_*.js

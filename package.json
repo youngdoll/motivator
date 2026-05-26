@@ -1,0 +1,10 @@
+{
+  "name": "system-2100",
+  "version": "1.0.0",
+  "private": true,
+  "description": "СИСТЕМА 21:00 — закрытый канал дисциплины",
+  "type": "module",
+  "dependencies": {
+    "@netlify/blobs": "^8.1.0"
+  }
+}
