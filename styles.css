@@ -264,7 +264,9 @@ body::before {
 
 .hero {
   position: relative;
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   min-height: 100vh;
   min-height: 100svh;
   padding: 110px clamp(18px, 5vw, 72px) 28px;
@@ -274,10 +276,9 @@ body::before {
 }
 
 .hero-content {
-  width: min(860px, 100%);
-  justify-self: start;
-  align-self: start;
-  margin-top: auto;
+  width: 100%;
+  max-width: 860px;
+  align-self: flex-start;
 }
 
 .eyebrow {
@@ -323,16 +324,10 @@ h1 {
 }
 
 .hero-actions {
-  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
   margin-top: 24px;
-}
-
-.hero-actions .button {
-  margin-left: 12px;
-}
-
-.hero-actions .button:first-child {
-  margin-left: 0;
 }
 
 /* ── Buttons ─────────────────────────────────────── */
@@ -376,8 +371,7 @@ h1 {
   grid-template-columns: repeat(3, 1fr);
   gap: 1px;
   width: min(600px, 100%);
-  align-self: end;
-  margin-top: auto;
+  margin-top: 12px;
   border: 1px solid rgba(255, 215, 0, 0.06);
   background: rgba(255, 215, 0, 0.06);
 }
@@ -661,15 +655,15 @@ h1 {
   .brand { font-size: 11px; }
   .brand-mark { width: 8px; height: 8px; }
   .header-cta { min-width: 74px; padding: 8px 10px; font-size: 10px; }
-  .hero { min-height: 100vh; min-height: 100svh; padding: 80px 14px 16px; }
-  .hero-content { align-self: start; margin-top: 0; width: 100%; }
+  .hero { justify-content: space-between; min-height: 100vh; min-height: 100svh; padding: 80px 14px 16px; }
+  .hero-content { align-self: auto; width: 100%; }
+  .hero-metrics { width: 100%; margin-top: auto; }
   h1 { font-size: clamp(34px, 13vw, 52px); }
   .hero-question { margin: 10px 0 0; font-size: clamp(17px, 4.5vw, 26px); }
   .hero-copy { margin: 10px 0 0; font-size: clamp(13px, 3.5vw, 16px); max-width: 100%; }
   .hero-actions { display: flex; flex-direction: column; margin-top: 16px; }
   .hero-actions .button { margin-left: 0; }
   .button { width: 100%; min-height: 44px; padding: 12px 16px; font-size: 11px; }
-  .hero-metrics { width: 100%; margin-top: auto; }
   .hero-metrics, .question-grid { grid-template-columns: 1fr; }
   .hero-metrics div { padding: 12px 14px; }
   .hero-metrics span { font-size: clamp(18px, 6vw, 28px); }
