@@ -147,7 +147,30 @@
     setInterval(blink, 3500);
   };
 
+  /* ── Video autoplay ────────────────────────────── */
+
+  var initVideo = function () {
+    var video = document.getElementById("bg-video");
+    var fallback = document.getElementById("bg-fallback");
+    if (!video) return;
+
+    var play = function () {
+      var p = video.play();
+      if (p !== undefined) {
+        p.catch(function () {
+          if (fallback) fallback.classList.add("show");
+        });
+      }
+    };
+
+    // Some browsers need user gesture. Try immediate, then on first interaction.
+    play();
+    document.addEventListener("click", play, { once: true });
+    document.addEventListener("touchstart", play, { once: true });
+  };
+
   observeAnimations();
   initDust();
   initCoordinates();
+  initVideo();
 })();
