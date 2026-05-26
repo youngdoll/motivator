@@ -47,7 +47,7 @@ img { max-width: 100%; display: block; }
   height: 100%;
   object-fit: cover;
   filter: blur(16px);
-  opacity: 0.65;
+  opacity: 0.75;
 }
 
 .bg-video-fallback {
@@ -328,11 +328,21 @@ body::before {
 }
 
 .hero-media {
-  position: absolute;
+  position: fixed;
   inset: -5%;
   z-index: -3;
   background: url("assets/hero-command-room.png") center / cover no-repeat;
   filter: blur(12px) saturate(0.35) brightness(0.5);
+  pointer-events: none;
+  will-change: opacity;
+}
+
+.hero-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 55%, rgba(5, 5, 5, 0.6) 90%, var(--bg) 100%);
+  pointer-events: none;
 }
 
 .hero-overlay {
@@ -341,22 +351,7 @@ body::before {
   z-index: -1;
   background:
     radial-gradient(circle at 25% 30%, rgba(255, 215, 0, 0.04), transparent 55%),
-    linear-gradient(180deg,
-      rgba(5, 5, 5, 0.08) 0%,
-      transparent 35%,
-      transparent 60%,
-      rgba(5, 5, 5, 0.5) 85%,
-      rgba(5, 5, 5, 0.7) 100%
-    );
-}
-
-/* Image fades out as we scroll down — video takes over */
-.hero-media::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, transparent 50%, var(--bg) 100%);
-  pointer-events: none;
+    linear-gradient(180deg, transparent 0%, transparent 60%, rgba(5, 5, 5, 0.3) 100%);
 }
 
 .hero-content {

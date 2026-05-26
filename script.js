@@ -187,8 +187,31 @@
     document.addEventListener("touchstart", start, { once: true });
   };
 
+  /* ── Scroll-driven image→video transition ────── */
+
+  var initScrollBlend = function () {
+    var hero = document.querySelector(".hero");
+    var media = document.querySelector(".hero-media");
+    if (!hero || !media) return;
+
+    var tick = function () {
+      var rect = hero.getBoundingClientRect();
+      var vh = window.innerHeight;
+      var fadeStart = vh * 0.7;
+      var fadeEnd = -vh * 0.3;
+      var t = (rect.bottom - fadeStart) / (fadeEnd - fadeStart);
+      var opacity = Math.max(0, Math.min(1, 1 - t));
+      media.style.opacity = opacity;
+    };
+
+    tick();
+    window.addEventListener("scroll", tick, { passive: true });
+    window.addEventListener("resize", tick, { passive: true });
+  };
+
   observeAnimations();
   initDust();
   initCoordinates();
   initVideo();
+  initScrollBlend();
 })();
