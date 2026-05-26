@@ -8,13 +8,18 @@
       name="description"
       content="Закрытый Telegram-канал для тех, кому надоело смотреть мотивацию вместо работы. Ежедневная подотчетность. Вход по заявке."
     />
-    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Space+Grotesk:wght@700;800&display=swap" rel="stylesheet" />
     <link rel="preload" href="assets/hero-command-room.png" as="image" />
     <link rel="stylesheet" href="styles.css" />
     <script src="config.js"></script>
     <script defer src="script.js"></script>
+    <noscript><style>.anim { opacity: 1 !important; transform: none !important; }</style></noscript>
   </head>
   <body>
+    <a class="skip-link" href="#top">К содержанию</a>
     <div class="scanline" aria-hidden="true"></div>
 
     <header class="site-header">
@@ -35,28 +40,28 @@
         <div class="hero-media" aria-hidden="true"></div>
         <div class="hero-overlay" aria-hidden="true"></div>
         <div class="hero-content">
-          <p class="eyebrow">Закрытый Telegram-канал. Бесплатно. Не для всех.</p>
-          <h1 id="hero-title">Ты уже знаешь, что тебе делать.</h1>
-          <p class="hero-question">Тогда почему не делаешь?</p>
-          <p class="hero-copy">
+          <p class="eyebrow anim anim-delay-1">Закрытый Telegram-канал. Бесплатно. Не для всех.</p>
+          <h1 id="hero-title" class="anim anim-delay-2">Ты уже знаешь, что тебе делать.</h1>
+          <p class="hero-question anim anim-delay-3">Тогда почему не делаешь?</p>
+          <p class="hero-copy anim anim-delay-3">
             Это не риторика. Это фильтр. Если ты снова пришел за зарядом, тебе не сюда.
             Здесь ежедневный отчет, конкретный факт и люди, перед которыми сложнее исчезнуть.
           </p>
-          <div class="hero-actions">
+          <div class="hero-actions anim anim-delay-4">
             <a class="button button-primary" data-bot-link href="https://t.me/YOUR_BOT_USERNAME">Пройти отбор</a>
             <a class="button button-secondary" href="#problem">Сначала прочитать</a>
           </div>
         </div>
         <div class="hero-metrics" aria-label="Статистика отбора">
-          <div>
+          <div class="anim anim-delay-1">
             <span data-reviewed>42</span>
             <p>заявки сегодня</p>
           </div>
-          <div>
+          <div class="anim anim-delay-2">
             <span data-rejected>137</span>
             <p>отклонено</p>
           </div>
-          <div>
+          <div class="anim anim-delay-3">
             <span>21:00</span>
             <p>ежедневный отчет</p>
           </div>
@@ -64,10 +69,10 @@
       </section>
 
       <section class="section problem-band" id="problem" aria-labelledby="problem-title">
-        <div class="section-kicker">01 / Проблема</div>
+        <div class="section-kicker anim">01 / Проблема</div>
         <div class="section-grid">
-          <h2 id="problem-title">Рынок мотивации работает против тебя.</h2>
-          <div class="copy-block">
+          <h2 id="problem-title" class="anim anim-delay-1">Рынок мотивации работает против тебя.</h2>
+          <div class="copy-block anim anim-delay-2">
             <p>
               Каждое мотивационное видео дает дозу. Быструю. Дешевую. Без усилий.
               Побочный эффект один: ты снова ничего не сделал.
@@ -81,22 +86,22 @@
       </section>
 
       <section class="section evidence" aria-labelledby="evidence-title">
-        <div class="section-kicker">02 / Зеркало</div>
-        <h2 id="evidence-title">Посчитай. Без красивых формулировок.</h2>
+        <div class="section-kicker anim">02 / Зеркало</div>
+        <h2 id="evidence-title" class="anim anim-delay-1">Посчитай. Без красивых формулировок.</h2>
         <div class="question-grid">
-          <article>
+          <article class="anim anim-delay-1">
             <span>01</span>
             <p>Сколько раз ты начинал одно и то же дело?</p>
           </article>
-          <article>
+          <article class="anim anim-delay-2">
             <span>02</span>
             <p>Сколько понедельников уже прошло без результата?</p>
           </article>
-          <article>
+          <article class="anim anim-delay-3">
             <span>03</span>
             <p>Сколько денег ушло на курсы, после которых ничего не изменилось?</p>
           </article>
-          <article>
+          <article class="anim anim-delay-4">
             <span>04</span>
             <p>Сколько лет ты называешь подготовкой то, что похоже на избегание?</p>
           </article>
@@ -104,23 +109,23 @@
       </section>
 
       <section class="section protocol" id="protocol" aria-labelledby="protocol-title">
-        <div class="section-kicker">03 / Протокол</div>
+        <div class="section-kicker anim">03 / Протокол</div>
         <div class="section-grid">
-          <h2 id="protocol-title">Здесь не лечат вдохновением. Здесь ставят рамку.</h2>
+          <h2 id="protocol-title" class="anim anim-delay-1">Здесь не лечат вдохновением. Здесь ставят рамку.</h2>
           <div class="protocol-list" role="list">
-            <div role="listitem">
+            <div class="anim anim-delay-1" role="listitem">
               <strong>Одно дело в день</strong>
               <p>Не десять целей. Один проверяемый шаг, который можно показать вечером.</p>
             </div>
-            <div role="listitem">
+            <div class="anim anim-delay-2" role="listitem">
               <strong>Отчет в 21:00</strong>
               <p>Что сделал. Что не сделал. Без “почти”, “старался” и “много думал”.</p>
             </div>
-            <div role="listitem">
+            <div class="anim anim-delay-3" role="listitem">
               <strong>Разбор провалов</strong>
               <p>Провал не прячется под стыдом. Он превращается в данные и следующий шаг.</p>
             </div>
-            <div role="listitem">
+            <div class="anim anim-delay-4" role="listitem">
               <strong>Среда практиков</strong>
               <p>Когда вокруг делают, бездействие перестает быть нормой.</p>
             </div>
@@ -129,9 +134,9 @@
       </section>
 
       <section class="section split-proof" aria-labelledby="proof-title">
-        <div class="section-kicker">04 / Без цирка</div>
+        <div class="section-kicker anim">04 / Без цирка</div>
         <div class="proof-columns">
-          <div>
+          <div class="anim anim-delay-1">
             <h2 id="proof-title">Что здесь есть</h2>
             <ul class="check-list">
               <li>Ежедневная подотчетность</li>
@@ -141,7 +146,7 @@
               <li>Разборы без театра и жалости</li>
             </ul>
           </div>
-          <div>
+          <div class="anim anim-delay-2">
             <h2>Чего здесь нет</h2>
             <ul class="no-list">
               <li>Арендованных тачек</li>
@@ -155,8 +160,8 @@
       </section>
 
       <section class="section bot-preview" aria-labelledby="bot-title">
-        <div class="section-kicker">05 / Анкета</div>
-        <div class="terminal">
+        <div class="section-kicker anim">05 / Анкета</div>
+        <div class="terminal anim anim-delay-1">
           <div class="terminal-bar">
             <span></span>
             <span></span>
@@ -174,7 +179,7 @@
       </section>
 
       <section class="section final-cta" id="filter" aria-labelledby="final-title">
-        <div class="final-inner">
+        <div class="final-inner anim">
           <p class="eyebrow">Финальный фильтр</p>
           <h2 id="final-title">Вход бесплатный. Но не автоматический.</h2>
           <p>
@@ -186,7 +191,7 @@
       </section>
     </main>
 
-    <footer class="site-footer">
+    <footer class="site-footer anim">
       <span>СИСТЕМА 21:00</span>
       <span>Без мотивации. Без аплодисментов. Только факты.</span>
     </footer>
