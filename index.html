@@ -8,10 +8,10 @@
       name="description"
       content="Закрытый Telegram-канал для тех, кому надоело смотреть мотивацию вместо работы. Ежедневная подотчетность. Вход по заявке."
     />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#050505" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Space+Grotesk:wght@700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@700;800&display=swap" rel="stylesheet" />
     <link rel="preload" href="assets/hero-command-room.png" as="image" />
     <link rel="stylesheet" href="styles.css" />
     <script src="config.js"></script>
@@ -20,7 +20,26 @@
   </head>
   <body>
     <a class="skip-link" href="#top">К содержанию</a>
+
+    <div class="bg-video-wrap" aria-hidden="true">
+      <video autoplay muted loop playsinline poster="assets/hero-command-room.png">
+        <source src="assets/bg-loop.mp4" type="video/mp4" />
+      </video>
+      <div class="bg-video-placeholder"></div>
+    </div>
+
+    <div class="glow-object glow-object--primary" aria-hidden="true"></div>
+    <div class="glow-object glow-object--secondary" aria-hidden="true"></div>
+    <div class="glow-object glow-object--tertiary" aria-hidden="true"></div>
+
+    <div class="noise-overlay" aria-hidden="true"></div>
     <div class="scanline" aria-hidden="true"></div>
+    <canvas id="dust-canvas" aria-hidden="true"></canvas>
+
+    <div class="coordinates" aria-hidden="true">
+      <span id="coord-line-1"></span>
+      <span id="coord-line-2"></span>
+    </div>
 
     <header class="site-header">
       <a class="brand" href="#top" aria-label="СИСТЕМА 21:00">
@@ -40,7 +59,7 @@
         <div class="hero-media" aria-hidden="true"></div>
         <div class="hero-overlay" aria-hidden="true"></div>
         <div class="hero-content">
-          <p class="eyebrow anim anim-delay-1">Закрытый Telegram-канал. Бесплатно. Не для всех.</p>
+          <p class="eyebrow anim anim-delay-1 flicker">Закрытый Telegram-канал. Бесплатно. Не для всех.</p>
           <h1 id="hero-title" class="anim anim-delay-2">Ты уже знаешь, что тебе делать.</h1>
           <p class="hero-question anim anim-delay-3">Тогда почему не делаешь?</p>
           <p class="hero-copy anim anim-delay-3">
@@ -180,7 +199,7 @@
 
       <section class="section final-cta" id="filter" aria-labelledby="final-title">
         <div class="final-inner anim">
-          <p class="eyebrow">Финальный фильтр</p>
+          <p class="eyebrow flicker">Финальный фильтр</p>
           <h2 id="final-title">Вход бесплатный. Но не автоматический.</h2>
           <p>
             Нажми кнопку. Ответь на вопросы бота честно. Решение придет после проверки.
