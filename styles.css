@@ -275,6 +275,7 @@ body::before {
 
 .hero-content {
   width: min(860px, 100%);
+  justify-self: start;
   align-self: start;
   margin-top: auto;
 }
@@ -322,11 +323,16 @@ h1 {
 }
 
 .hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
+  text-align: right;
   margin-top: 24px;
-  justify-content: flex-end;
+}
+
+.hero-actions .button {
+  margin-left: 12px;
+}
+
+.hero-actions .button:first-child {
+  margin-left: 0;
 }
 
 /* ── Buttons ─────────────────────────────────────── */
@@ -648,7 +654,6 @@ h1 {
   .top-nav { display: none; }
   .section-grid, .proof-columns { grid-template-columns: 1fr; }
   .question-grid { grid-template-columns: repeat(2, 1fr); }
-  .hero-actions { justify-content: flex-end; }
 }
 
 @media (max-width: 640px) {
@@ -661,7 +666,8 @@ h1 {
   h1 { font-size: clamp(34px, 13vw, 52px); }
   .hero-question { margin: 10px 0 0; font-size: clamp(17px, 4.5vw, 26px); }
   .hero-copy { margin: 10px 0 0; font-size: clamp(13px, 3.5vw, 16px); max-width: 100%; }
-  .hero-actions { margin-top: 16px; flex-direction: column; }
+  .hero-actions { display: flex; flex-direction: column; margin-top: 16px; }
+  .hero-actions .button { margin-left: 0; }
   .button { width: 100%; min-height: 44px; padding: 12px 16px; font-size: 11px; }
   .hero-metrics { width: 100%; margin-top: auto; }
   .hero-metrics, .question-grid { grid-template-columns: 1fr; }
