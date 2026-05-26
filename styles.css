@@ -265,6 +265,7 @@ body::before {
 .hero {
   position: relative;
   display: grid;
+  min-height: 100vh;
   min-height: 100svh;
   padding: 110px clamp(18px, 5vw, 72px) 28px;
   overflow: hidden;
@@ -655,14 +656,14 @@ h1 {
   .brand { font-size: 11px; }
   .brand-mark { width: 8px; height: 8px; }
   .header-cta { min-width: 74px; padding: 8px 10px; font-size: 10px; }
-  .hero { min-height: 100svh; padding: 88px 14px 16px; }
+  .hero { min-height: 100vh; min-height: 100svh; padding: 80px 14px 16px; }
+  .hero-content { align-self: start; margin-top: 0; width: 100%; }
   h1 { font-size: clamp(34px, 13vw, 52px); }
   .hero-question { margin: 10px 0 0; font-size: clamp(17px, 4.5vw, 26px); }
-  .hero-copy { margin: 10px 0 0; font-size: clamp(13px, 3.5vw, 16px); }
+  .hero-copy { margin: 10px 0 0; font-size: clamp(13px, 3.5vw, 16px); max-width: 100%; }
   .hero-actions { margin-top: 16px; flex-direction: column; }
-  .hero-actions .button:first-child { margin-right: 0; }
   .button { width: 100%; min-height: 44px; padding: 12px 16px; font-size: 11px; }
-  .hero-metrics { width: 100%; }
+  .hero-metrics { width: 100%; margin-top: auto; }
   .hero-metrics, .question-grid { grid-template-columns: 1fr; }
   .hero-metrics div { padding: 12px 14px; }
   .hero-metrics span { font-size: clamp(18px, 6vw, 28px); }

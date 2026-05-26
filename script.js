@@ -91,6 +91,7 @@
     var dur = video.duration || 1;
 
     var tick = function (now) {
+      if (!started || !dur) { requestAnimationFrame(tick); return; }
       if (now - last < THROTTLE) { requestAnimationFrame(tick); return; }
       last = now;
       VP += dir * SPEED;
@@ -100,18 +101,27 @@
       requestAnimationFrame(tick);
     };
 
-    var start = function () {
+    var boot = function () {
       if (started) return;
-      started = true;
       video.play().then(function () {
-        dur = video.duration;
+        started = true;
+        dur = video.duration || dur;
         requestAnimationFrame(tick);
-      }).catch(function () {});
+      }).catch(function () {
+        /* no gesture yet — handlers below will retry */
+      });
     };
 
-    if (video.readyState >= 2) { start(); }
-    else { video.addEventListener("canplay", start, { once: true }); }
-    document.addEventListener("click", start, { once: true });
-    document.addEventListener("touchstart", start, { once: true });
+    /* get duration as soon as possible but don't play yet */
+    var metaLoaded = function () { dur = video.duration || dur; };
+    if (video.readyState >= 2) { metaLoaded(); }
+    else { video.addEventListener("canplay", metaLoaded, { once: true }); }
+
+    /* first user gesture starts the video */
+    document.addEventListener("click", boot, { once: true });
+    document.addEventListener("touchstart", boot, { once: true });
+
+    /* also try immediately — some browsers allow autoplay */
+    boot();
   }
 })();
